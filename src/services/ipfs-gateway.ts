@@ -43,7 +43,7 @@ const patch = (url, options = {}) =>  apiRequest("patch", url, options);
 
 const getBlockAndVerify = async function (baseURL, expectedCID) {
     console.log("Fetching Block for "+expectedCID+" from "+baseURL);
-    const resp = await get(baseURL + "/api/v0/block/get?arg="+expectedCID.toV1().toString(), {responseType: "arraybuffer"})
+    const resp = await get(baseURL + "ipfs/"+expectedCID.toV1().toString()+"?format=raw", {responseType: "arraybuffer"})
                                 .catch(fail_with("Can't retrieve block for " + expectedCID.toV1().toString() + " with " + baseURL));
     console.log("Recieved Block for "+expectedCID.toV1().toString()+" from "+baseURL);
     const resp_bytes = new Uint8Array(resp);

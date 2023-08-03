@@ -27,6 +27,7 @@
     "@ipld/dag-pb": "^2.1.16",
     "@kanru/rage-wasm": "^0.2.2",
     "axios": "^0.27.2",
+    "carbites-cli": "^1.0.0",
     "ipfs-unixfs": "^6.0.7",
     "multiformats": "^9.6.4",
     "process": "^0.11.10",

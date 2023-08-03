@@ -37,7 +37,7 @@
   let blob = undefined;
 
   const download = () => {
-    const baseURL : String = $gateway[selected_gateway][0];
+    const baseURL : String = $gateway[selected_gateway];
     console.log("Starting download using %s...", baseURL);
     progress = 0.0;
     IpfsGateway.get(baseURL+"ipfs/"+content.cid, {
@@ -158,7 +158,7 @@
   >
     {#if $gateway != null}
       {#each $gateway as gw, i}
-        <option value={i}>{gw[0]}{gw[1] ? " (expose API)": ""}</option>
+        <option value={i}>{gw}</option>
       {/each}
     {:else if $gateway !== null}
       <option value="-1">Loading...</option>

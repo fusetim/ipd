@@ -29,8 +29,8 @@
 
   const lookupMetadata = () => {
     const rootCID = CID.parse(root_cid, base64url.decoder)
-    return Promise.any($gateway.filter((gwi) => gwi[1]).map((gwi) => 
-      IpfsGateway.getBlockAndVerify(gwi[0], rootCID).then(async (root) => {
+    return Promise.any($gateway.map((gwi) => 
+      IpfsGateway.getBlockAndVerify(gwi, rootCID).then(async (root) => {
         console.log("Exploring root dag!");
         // Traverse root block to find metadata block. 
         let found = [false, false]; 
@@ -40,7 +40,7 @@
           if(link.Name === "metadata") {
             found = [true, found[1]];
             console.log("metadata cid: %s", link.Hash.toV1().toString());
-            await IpfsGateway.getBlockAndVerify(/*ipfs,*/ gwi[0], link.Hash).then(async (metadata_block) => {
+            await IpfsGateway.getBlockAndVerify(/*ipfs,*/ gwi, link.Hash).then(async (metadata_block) => {
               console.log("Reading metadata file");
               const unixfile = UnixFS.unmarshal(metadata_block.Data);
               console.log("Metadata file content: \n%s", new TextDecoder().decode(unixfile.data));
